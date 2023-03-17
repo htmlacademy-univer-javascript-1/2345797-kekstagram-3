@@ -9,19 +9,17 @@ getRadomNumber(0, 10);
 checkStringLen("aboba", 5);
 
 // return new description photo object
-const createDescriptionPhoto = (id) => {
-  return {
+const createDescriptionPhoto = (id) => ({
     id: id,
     url: `photos/${id}.jpg`,
     description: `It's my new photo number ${id}`,
     likes: getRadomNumber(15, 200),
     comments: getRadomNumber(0, 200),
-  };
-};
+});
 
 // return the massive of description obj with size countDescriptions
 const createDescriptionMassive = (countDescriptions) => {
-  let massive = Array.from({ length: countDescriptions });
+  const massive = Array.from({ length: countDescriptions });
   return massive.map((_, id) => createDescriptionPhoto(id + 1));
 };
 
