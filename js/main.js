@@ -6,7 +6,7 @@ const checkStringLen = (str, maxLen) => str.length <= maxLen;
 
 // test prints
 getRadomNumber(0, 10);
-checkStringLen("aboba", 5);
+checkStringLen('aboba', 5);
 
 // return new description photo object
 const createDescriptionPhoto = (id) => ({
