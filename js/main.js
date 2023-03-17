@@ -18,10 +18,10 @@ const createDescriptionPhoto = (id) => ({
 });
 
 // return the massive of description obj with size countDescriptions
-const createDescriptionMassive = (countDescriptions) => {
-  const massive = Array.from({ length: countDescriptions });
-  return massive.map((_, id) => createDescriptionPhoto(id + 1));
-};
+const createDescriptionMassive = (countDescriptions) =>
+  Array.from({ length: countDescriptions }, (_, id) =>
+    createDescriptionPhoto(id + 1)
+  );
 
 // test prints
 const DESCRIPTIONS_COUNT = 25;
