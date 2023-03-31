@@ -1,5 +1,6 @@
-import { createDescriptionMassive } from './data.js';
+import { createPhotoDescriptions } from './data.js';
+import { drawPhotoDescriptions } from './draw-pictures.js';
 
-// test prints
 const DESCRIPTIONS_COUNT = 25;
-createDescriptionMassive(DESCRIPTIONS_COUNT);
+const photoDescriptions = createPhotoDescriptions(DESCRIPTIONS_COUNT);
+drawPhotoDescriptions(photoDescriptions);
