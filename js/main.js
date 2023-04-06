@@ -1,2 +1,2 @@
 import './setup.js';
-import './photo-form.js';
+import './photo-modal.js';

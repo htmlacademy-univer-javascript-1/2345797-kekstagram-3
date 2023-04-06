@@ -11,4 +11,6 @@ const findTemplate = (nameOfTemplate, nameOfElementInTemplate) =>
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export { getRadomNumber, checkStringLen, findTemplate, isEscapeKey };
+const isHashtagValid = (value) => /^(#[a-zA-Zа-яА-ЯЁё0-9\-_]{3,15} *)+$/.test(value);
+
+export { getRadomNumber, checkStringLen, findTemplate, isEscapeKey, isHashtagValid };
