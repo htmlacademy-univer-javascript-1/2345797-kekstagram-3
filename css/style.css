@@ -673,7 +673,6 @@ main {
   width: 450px;
 
   margin: 0 auto;
-  margin-bottom: 20px;
   padding: 5px 10px;
 
   font-family: "Open Sans", "Arial", sans-serif;
@@ -1394,4 +1393,8 @@ main {
 
 .hidden {
   display: none;
+}
+
+.img-upload__field__heshteg {
+  margin-bottom: 20px;
 }

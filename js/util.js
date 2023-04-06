@@ -9,4 +9,8 @@ const findTemplate = (nameOfTemplate, nameOfElementInTemplate) =>
     .querySelector(nameOfTemplate)
     .content.querySelector(nameOfElementInTemplate);
 
-export { getRadomNumber, checkStringLen, findTemplate };
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+const isHashtagValid = (value) => /^(#[a-zA-Zа-яА-ЯЁё0-9\-_]{3,15} *)+$/.test(value);
+
+export { getRadomNumber, checkStringLen, findTemplate, isEscapeKey, isHashtagValid };
