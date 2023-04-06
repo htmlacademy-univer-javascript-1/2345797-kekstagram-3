@@ -9,4 +9,6 @@ const findTemplate = (nameOfTemplate, nameOfElementInTemplate) =>
     .querySelector(nameOfTemplate)
     .content.querySelector(nameOfElementInTemplate);
 
-export { getRadomNumber, checkStringLen, findTemplate };
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export { getRadomNumber, checkStringLen, findTemplate, isEscapeKey };
