@@ -17,9 +17,7 @@ const onPopupEscKeydown = (evt) => {
 const reloadForm = () => {
   // Убираем сообщение об ошибке при сбросе формы
   const errorMessage = imgUploadForm.querySelectorAll('.pristine-error');
-  if (errorMessage) {
-    errorMessage.forEach((element) => { element.style['display'] = 'none'; });
-  }
+  errorMessage.forEach((element) => { element.style['display'] = 'none'; });
   // Сброс формы
   imgUploadForm.reset();
 };
