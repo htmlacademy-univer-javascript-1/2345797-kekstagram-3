@@ -4,6 +4,8 @@ const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFileElement = imgUploadForm.querySelector('#upload-file');
 const imgUploadOverlayElement = imgUploadForm.querySelector('.img-upload__overlay');
 const imgCloseElement = imgUploadOverlayElement.querySelector('.img-upload__cancel');
+const imgUploadTextElement = imgUploadOverlayElement.querySelector('.img-upload__text');
+const imgUploadButtonElement = imgUploadOverlayElement.querySelector('.img-upload__submit');
 
 // Функция для закрытия окна редактирования по эвенту ESC
 const onPopupEscKeydown = (evt) => {
@@ -49,6 +51,11 @@ uploadFileElement.addEventListener('change', () => {
 imgCloseElement.addEventListener('click', (evt) => {
   evt.preventDefault();
   closePhotoModal();
+});
+
+// Поменяли текст в форме
+imgUploadTextElement.addEventListener('input', () => {
+  imgUploadButtonElement.disabled = !pristine.validate();
 });
 
 // Отправка формы
