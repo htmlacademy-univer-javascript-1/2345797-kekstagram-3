@@ -9,7 +9,7 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'div',
   errorTextClass: 'form__error',
-});
+}, true);
 
 pristine.addValidator(
   hashtagsElement,
@@ -17,4 +17,11 @@ pristine.addValidator(
   'Формат ввода: #(символы от 3 до 15)',
 );
 
-export { pristine };
+const hideValidateMessages = () => {
+  const errorMessage = imgUploadForm.querySelectorAll('.form__error');
+  errorMessage.forEach((element) => { element.style['display'] = 'none'; });
+};
+
+const formIsValid = () => pristine.validate();
+
+export { formIsValid, hideValidateMessages };

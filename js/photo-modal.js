@@ -1,9 +1,13 @@
 import { isEscapeKey } from './util.js';
-import { pristine } from './photo-form.js';
+import { formIsValid, hideValidateMessages } from './photo-validate-form.js';
+import { setScaleToStart } from './photo-scale-editor.js';
+import { clearEffect } from './photo-effect.js';
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFileElement = imgUploadForm.querySelector('#upload-file');
 const imgUploadOverlayElement = imgUploadForm.querySelector('.img-upload__overlay');
 const imgCloseElement = imgUploadOverlayElement.querySelector('.img-upload__cancel');
+// const imgUploadTextElement = imgUploadOverlayElement.querySelector('.img-upload__text');
+// const imgUploadButtonElement = imgUploadOverlayElement.querySelector('.img-upload__submit');
 
 // Функция для закрытия окна редактирования по эвенту ESC
 const onPopupEscKeydown = (evt) => {
@@ -16,21 +20,21 @@ const onPopupEscKeydown = (evt) => {
 
 const reloadForm = () => {
   // Убираем сообщение об ошибке при сбросе формы
-  const errorMessage = imgUploadForm.querySelectorAll('.pristine-error');
-  if (errorMessage) {
-    errorMessage.forEach((element) => { element.style['display'] = 'none'; });
-  }
+  hideValidateMessages();
   // Сброс формы
   imgUploadForm.reset();
+  // Сброс масштаба
+  setScaleToStart();
+  // Сброс стиля
+  clearEffect();
 };
 
 // Функция для открытия окна редактирования
 function closePhotoModal() {
   imgUploadOverlayElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  // Удалили лисенер на ESC
+  // Удалили листенер на ESC
   document.removeEventListener('keydown', onPopupEscKeydown);
-  // Сбрасываем форму
   reloadForm();
 }
 
@@ -38,7 +42,7 @@ function closePhotoModal() {
 function openPhotoModal () {
   imgUploadOverlayElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  // Лисенер на ESC
+  // Листенер на ESC
   document.addEventListener('keydown', onPopupEscKeydown);
 }
 
@@ -53,9 +57,16 @@ imgCloseElement.addEventListener('click', (evt) => {
   closePhotoModal();
 });
 
+/*
+// Поменяли текст в форме
+imgUploadTextElement.addEventListener('input', () => {
+  imgUploadButtonElement.disabled = !formIsValid();
+});
+*/
+
 // Отправка формы
 imgUploadForm.addEventListener('submit', (evt) => {
-  const isValid = pristine.validate();
+  const isValid = formIsValid();
   if (!isValid) {
     evt.preventDefault();
     // return;
