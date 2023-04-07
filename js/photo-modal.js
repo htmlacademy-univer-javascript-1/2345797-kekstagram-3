@@ -1,6 +1,7 @@
 import { isEscapeKey } from './util.js';
 import { formIsValid, hideValidateMessages } from './photo-validate-form.js';
 import { setScaleToStart } from './photo-scale-editor.js';
+import { clearEffect } from './photo-effect.js';
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFileElement = imgUploadForm.querySelector('#upload-file');
 const imgUploadOverlayElement = imgUploadForm.querySelector('.img-upload__overlay');
@@ -24,6 +25,8 @@ const reloadForm = () => {
   imgUploadForm.reset();
   // Сброс масштаба
   setScaleToStart();
+  // Сброс стиля
+  clearEffect();
 };
 
 // Функция для открытия окна редактирования

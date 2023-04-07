@@ -13,7 +13,7 @@ const scaleControl = {
 
 const changeScale = (newScale) => {
   scaleControlValueELement.value = `${newScale}%`;
-  imgUploadPreviewElement.children[0].style = `transform: scale(${newScale / 100})`;
+  imgUploadPreviewElement.children[0].style = `transform: scale(${newScale / scaleControl.max})`;
 };
 
 const setScaleToStart = () => changeScale(scaleControl.start);
