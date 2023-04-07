@@ -2,7 +2,7 @@ const imgUploadScaleElement = document.querySelector('.img-upload__scale');
 const scaleControlSmallerElement = imgUploadScaleElement.querySelector('.scale__control--smaller');
 const scaleControlValueELement = imgUploadScaleElement.querySelector('.scale__control--value');
 const scaleControlBiggerElement = imgUploadScaleElement.querySelector('.scale__control--bigger');
-const imgUploadPreviewElement = document.querySelector('.img-upload__preview');
+const imgUploadPreviewElement = document.querySelector('.img-upload__preview').children[0];
 
 const scaleControl = {
   step: 25,
@@ -13,7 +13,7 @@ const scaleControl = {
 
 const changeScale = (newScale) => {
   scaleControlValueELement.value = `${newScale}%`;
-  imgUploadPreviewElement.children[0].style = `transform: scale(${newScale / scaleControl.max})`;
+  imgUploadPreviewElement.style['transform'] = `scale(${newScale / scaleControl.max})`;
 };
 
 const setScaleToStart = () => changeScale(scaleControl.start);
