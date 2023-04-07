@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { pristine } from './photo-validate-form.js';
+import { formIsValid, hideValidateMessages } from './photo-validate-form.js';
 import { setScaleToStart } from './photo-scale-editor.js';
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFileElement = imgUploadForm.querySelector('#upload-file');
@@ -19,8 +19,7 @@ const onPopupEscKeydown = (evt) => {
 
 const reloadForm = () => {
   // Убираем сообщение об ошибке при сбросе формы
-  const errorMessage = imgUploadForm.querySelectorAll('.form__error');
-  errorMessage.forEach((element) => { element.style['display'] = 'none'; });
+  hideValidateMessages();
   // Сброс формы
   imgUploadForm.reset();
   // Сброс масштаба
@@ -58,13 +57,13 @@ imgCloseElement.addEventListener('click', (evt) => {
 /*
 // Поменяли текст в форме
 imgUploadTextElement.addEventListener('input', () => {
-  imgUploadButtonElement.disabled = !pristine.validate();
+  imgUploadButtonElement.disabled = !formIsValid();
 });
 */
 
 // Отправка формы
 imgUploadForm.addEventListener('submit', (evt) => {
-  const isValid = pristine.validate();
+  const isValid = formIsValid();
   if (!isValid) {
     evt.preventDefault();
     // return;
