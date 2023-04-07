@@ -1,5 +1,6 @@
 import { isEscapeKey } from './util.js';
-import { pristine } from './photo-form.js';
+import { pristine } from './photo-validate-form.js';
+import { setScaleToStart } from './photo-scale-editor.js';
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFileElement = imgUploadForm.querySelector('#upload-file');
 const imgUploadOverlayElement = imgUploadForm.querySelector('.img-upload__overlay');
@@ -18,10 +19,12 @@ const onPopupEscKeydown = (evt) => {
 
 const reloadForm = () => {
   // Убираем сообщение об ошибке при сбросе формы
-  const errorMessage = imgUploadForm.querySelectorAll('.pristine-error');
+  const errorMessage = imgUploadForm.querySelectorAll('.form__error');
   errorMessage.forEach((element) => { element.style['display'] = 'none'; });
   // Сброс формы
   imgUploadForm.reset();
+  // Сброс масштаба
+  setScaleToStart();
 };
 
 // Функция для открытия окна редактирования
@@ -30,7 +33,6 @@ function closePhotoModal() {
   document.body.classList.remove('modal-open');
   // Удалили листенер на ESC
   document.removeEventListener('keydown', onPopupEscKeydown);
-  // Сбрасываем форму
   reloadForm();
 }
 
