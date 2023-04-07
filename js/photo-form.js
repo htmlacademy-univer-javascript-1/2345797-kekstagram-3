@@ -9,7 +9,7 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'div',
   errorTextClass: 'form__error',
-});
+}, true);
 
 pristine.addValidator(
   hashtagsElement,
