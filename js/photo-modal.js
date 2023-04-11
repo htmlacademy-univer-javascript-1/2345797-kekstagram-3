@@ -38,12 +38,19 @@ function closePhotoModal() {
   reloadForm();
 }
 
+// Обновление состояние кнопки отправки формы
+const updateButtonStatus = () => {
+  imgUploadButtonElement.disabled = !formIsValid(true);
+};
+
 // Функция для открытия окна редактирования
 function openPhotoModal () {
   imgUploadOverlayElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
   // Листенер на ESC
   document.addEventListener('keydown', onPopupEscKeydown);
+  // Обновление кнопки отправки
+  updateButtonStatus();
 }
 
 // Загрузка изображения открывает окно редактирования
@@ -57,9 +64,6 @@ imgCloseElement.addEventListener('click', (evt) => {
   closePhotoModal();
 });
 
-const updateButtonStatus = () => {
-  imgUploadButtonElement.disabled = !formIsValid(true);
-};
 
 imgUploadTextElement.addEventListener('input', updateButtonStatus);
 
