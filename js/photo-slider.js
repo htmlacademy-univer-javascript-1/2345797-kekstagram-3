@@ -73,7 +73,7 @@ sliderDivElement.noUiSlider.on('update', () => {
   const valueSlider = sliderDivElement.noUiSlider.get();
   effectLevelValueElement.value = valueSlider;
   if (effectNow !== 'none') {
-    imgUploadPreviewElement.style['filter'] = effects[effectNow]['pattern'](valueSlider);
+    imgUploadPreviewElement.style.filter = effects[effectNow].pattern(valueSlider);
   }
 });
 
@@ -81,11 +81,11 @@ const changeEffect = (effect) => {
   effectNow = effect;
   if (effectNow === 'none') {
     imgUploadEffectLevelElement.classList.add('hidden');
-    imgUploadPreviewElement.style['filter'] = '';
+    imgUploadPreviewElement.style.filter = '';
     return;
   }
   imgUploadEffectLevelElement.classList.remove('hidden');
-  sliderDivElement.noUiSlider.updateOptions(effects[effectNow]['settings']);
+  sliderDivElement.noUiSlider.updateOptions(effects[effectNow].settings);
   sliderDivElement.noUiSlider.set(effects[effectNow].settings.range.max);
 };
 

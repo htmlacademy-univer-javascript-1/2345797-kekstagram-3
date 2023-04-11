@@ -118,7 +118,9 @@
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
                   <div class="img-upload__field-wrapper img-upload__field__heshteg add_margin_20">
-                    <input class="text__hashtags remove_margin" name="hashtags" placeholder="#ХэшТег" maxlength="40" required 
+                    <input class="text__hashtags remove_margin" name="hashtags" placeholder="#ХэшТег" maxlength="40" 
+                    pattern="/^(?!.*(?:^|\s)#([a-zа-яё0-9\-_]{3,15})(?:(?=\s)|$).*#\1(?:\s|$)).*(?:^|\s)#([a-zа-яё0-9\-_]{3,15})(?:(?=\s)|$)$/ig" required 
+                    data-pristine-pattern-message="Формат ввода: #(символы от 3 до 15)"
                     data-pristine-required-message="Обязательное поле">
                   </div>
                   <div class="img-upload__field-wrapper">
