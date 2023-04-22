@@ -1,2 +1,4 @@
 import './setup.js';
-import './photo-modal.js';
+import { startModalWindow } from './photo-modal.js';
+
+startModalWindow();

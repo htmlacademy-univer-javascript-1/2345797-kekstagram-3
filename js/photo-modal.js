@@ -53,26 +53,28 @@ function openPhotoModal () {
   updateButtonStatus();
 }
 
-// Загрузка изображения открывает окно редактирования
-uploadFileElement.addEventListener('change', () => {
-  openPhotoModal();
-});
+let startModalWindow = () => { 
+  // Загрузка изображения открывает окно редактирования
+  uploadFileElement.addEventListener('change', openPhotoModal);
 
-// Кнопка закрывает окно редактирования
-imgCloseElement.addEventListener('click', (evt) => {
-  evt.preventDefault();
-  closePhotoModal();
-});
-
-
-imgUploadTextElement.addEventListener('input', updateButtonStatus);
-
-// Отправка формы
-imgUploadForm.addEventListener('submit', (evt) => {
-  const isValid = formIsValid();
-  updateButtonStatus();
-  if (!isValid) {
+  // Кнопка закрывает окно редактирования
+  imgCloseElement.addEventListener('click', (evt) => {
     evt.preventDefault();
-    // return;
-  }
-});
+    closePhotoModal();
+  });
+
+  // Изменился текст в форме
+  imgUploadTextElement.addEventListener('input', updateButtonStatus);
+
+  // Отправка формы
+  imgUploadForm.addEventListener('submit', (evt) => {
+    const isValid = formIsValid();
+    updateButtonStatus();
+    if (!isValid) {
+      evt.preventDefault();
+      // return;
+    }
+  });
+};
+
+export { startModalWindow }
