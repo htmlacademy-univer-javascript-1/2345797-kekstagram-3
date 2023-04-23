@@ -2,6 +2,8 @@ import { isEscapeKey } from './util.js';
 import { formIsValid, hideValidateMessages } from './photo-validate-form.js';
 import { setScaleToStart } from './photo-scale-editor.js';
 import { clearEffect } from './photo-effect.js';
+import { sendData } from './api.js';
+import { showSendDataAllert } from './messages.js'; 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFileElement = imgUploadForm.querySelector('#upload-file');
 const imgUploadOverlayElement = imgUploadForm.querySelector('.img-upload__overlay');
@@ -38,9 +40,25 @@ function closePhotoModal() {
   reloadForm();
 }
 
+let formUploading = false;
 // Обновление состояние кнопки отправки формы
 const updateButtonStatus = () => {
+  if (formUploading) {
+    return;
+  } 
   imgUploadButtonElement.disabled = !formIsValid(true);
+};
+
+const blockSubmitButton = () => {
+  formUploading = true;
+  imgUploadButtonElement.disabled = true;
+  imgUploadButtonElement.textContent = 'Сохраняю...';
+};
+
+const unblockSubmitButton = () => {
+  formUploading = false;
+  imgUploadButtonElement.disabled = false;
+  imgUploadButtonElement.textContent = 'Сохранить';
 };
 
 // Функция для открытия окна редактирования
@@ -53,7 +71,7 @@ function openPhotoModal () {
   updateButtonStatus();
 }
 
-let startModalWindow = () => { 
+const startModalWindow = () => { 
   // Загрузка изображения открывает окно редактирования
   uploadFileElement.addEventListener('change', openPhotoModal);
 
@@ -68,12 +86,22 @@ let startModalWindow = () => {
 
   // Отправка формы
   imgUploadForm.addEventListener('submit', (evt) => {
-    const isValid = formIsValid();
-    updateButtonStatus();
-    if (!isValid) {
-      evt.preventDefault();
-      // return;
+    evt.preventDefault();
+    if (!formIsValid()) {
+      return;
     }
+    blockSubmitButton();
+    sendData(
+      () => {
+        closePhotoModal();
+        unblockSubmitButton();
+      },
+      () => {
+        showSendDataAllert();
+        unblockSubmitButton();
+      },
+      new FormData(evt.target),
+    );
   });
 };
 

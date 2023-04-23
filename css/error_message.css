@@ -4,4 +4,6 @@
     margin: 0;
     text-align: center;
     font-weight: bold;
+    position: absolute;
+    font-size: 18px;
 }
