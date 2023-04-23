@@ -1,6 +1,4 @@
-import { isHashtagValid } from './util.js';
 const imgUploadForm = document.querySelector('.img-upload__form');
-const hashtagsElement = imgUploadForm.querySelector('.text__hashtags');
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -11,17 +9,11 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'form__error',
 }, true);
 
-pristine.addValidator(
-  hashtagsElement,
-  isHashtagValid,
-  'Формат ввода: #(символы от 3 до 15)',
-);
-
 const hideValidateMessages = () => {
   const errorMessage = imgUploadForm.querySelectorAll('.form__error');
-  errorMessage.forEach((element) => { element.style['display'] = 'none'; });
+  errorMessage.forEach((element) => { element.style.display = 'none'; });
 };
 
-const formIsValid = () => pristine.validate();
+const formIsValid = (silent = false) => pristine.validate(silent);
 
 export { formIsValid, hideValidateMessages };
