@@ -3,7 +3,7 @@ import { formIsValid, hideValidateMessages } from './photo-validate-form.js';
 import { setScaleToStart } from './photo-scale-editor.js';
 import { clearEffect } from './photo-effect.js';
 import { sendData } from './api.js';
-import { showSendDataAlert } from './messages.js';
+import { showSendDataAlert, showSendDataSuccess } from './messages.js';
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFileElement = imgUploadForm.querySelector('#upload-file');
 const imgUploadOverlayElement = imgUploadForm.querySelector('.img-upload__overlay');
@@ -94,6 +94,7 @@ const startModalWindow = () => {
     sendData(
       () => {
         closePhotoModal();
+        showSendDataSuccess();
         unblockSubmitButton();
       },
       () => {
