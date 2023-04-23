@@ -3,7 +3,7 @@ import { formIsValid, hideValidateMessages } from './photo-validate-form.js';
 import { setScaleToStart } from './photo-scale-editor.js';
 import { clearEffect } from './photo-effect.js';
 import { sendData } from './api.js';
-import { showSendDataAllert } from './messages.js'; 
+import { showSendDataAlert } from './messages.js';
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFileElement = imgUploadForm.querySelector('#upload-file');
 const imgUploadOverlayElement = imgUploadForm.querySelector('.img-upload__overlay');
@@ -13,7 +13,7 @@ const imgUploadButtonElement = imgUploadOverlayElement.querySelector('.img-uploa
 
 // Функция для закрытия окна редактирования по эвенту ESC
 const onPopupEscKeydown = (evt) => {
-  if (!isEscapeKey(evt)) {
+  if (!isEscapeKey(evt) || imgUploadOverlayElement.classList.contains('hidden')) {
     return;
   }
   evt.preventDefault();
@@ -45,7 +45,7 @@ let formUploading = false;
 const updateButtonStatus = () => {
   if (formUploading) {
     return;
-  } 
+  }
   imgUploadButtonElement.disabled = !formIsValid(true);
 };
 
@@ -71,7 +71,7 @@ function openPhotoModal () {
   updateButtonStatus();
 }
 
-const startModalWindow = () => { 
+const startModalWindow = () => {
   // Загрузка изображения открывает окно редактирования
   uploadFileElement.addEventListener('change', openPhotoModal);
 
@@ -97,12 +97,12 @@ const startModalWindow = () => {
         unblockSubmitButton();
       },
       () => {
-        showSendDataAllert();
+        showSendDataAlert();
         unblockSubmitButton();
       },
-      new FormData(evt.target),
+      new FormData(evt.target)
     );
   });
 };
 
-export { startModalWindow }
+export { startModalWindow };
