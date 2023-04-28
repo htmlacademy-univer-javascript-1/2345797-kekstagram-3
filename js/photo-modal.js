@@ -5,16 +5,16 @@ import { clearEffect } from './photo-effect.js';
 import { sendData } from './api.js';
 import { showSendDataAlert, showSendDataSuccess } from './messages.js';
 import { changePhotoPreview } from './photo-view.js';
-const imgUploadForm = document.querySelector('.img-upload__form');
-const uploadFileElement = imgUploadForm.querySelector('#upload-file');
-const imgUploadOverlayElement = imgUploadForm.querySelector('.img-upload__overlay');
-const imgCloseElement = imgUploadOverlayElement.querySelector('.img-upload__cancel');
-const imgUploadTextElement = imgUploadOverlayElement.querySelector('.img-upload__text');
-const imgUploadButtonElement = imgUploadOverlayElement.querySelector('.img-upload__submit');
+const uploadFormElement = document.querySelector('.img-upload__form');
+const uploadFileElement = uploadFormElement.querySelector('#upload-file');
+const uploadOverlayElement = uploadFormElement.querySelector('.img-upload__overlay');
+const closeButtonElement = uploadOverlayElement.querySelector('.img-upload__cancel');
+const uploadTextElement = uploadOverlayElement.querySelector('.img-upload__text');
+const uploadButtonElement = uploadOverlayElement.querySelector('.img-upload__submit');
 
 // Функция для закрытия окна редактирования по эвенту ESC
 const onPopupEscKeydown = (evt) => {
-  if (!isEscapeKey(evt) || imgUploadOverlayElement.classList.contains('hidden')) {
+  if (!isEscapeKey(evt) || uploadOverlayElement.classList.contains('hidden')) {
     return;
   }
   evt.preventDefault();
@@ -25,7 +25,7 @@ const reloadForm = () => {
   // Убираем сообщение об ошибке при сбросе формы
   hideValidateMessages();
   // Сброс формы
-  imgUploadForm.reset();
+  uploadFormElement.reset();
   // Сброс масштаба
   setScaleToStart();
   // Сброс стиля
@@ -34,7 +34,7 @@ const reloadForm = () => {
 
 // Функция для открытия окна редактирования
 function closePhotoModal() {
-  imgUploadOverlayElement.classList.add('hidden');
+  uploadOverlayElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   // Удалили листенер на ESC
   document.removeEventListener('keydown', onPopupEscKeydown);
@@ -47,47 +47,47 @@ const updateButtonStatus = () => {
   if (formUploading) {
     return;
   }
-  imgUploadButtonElement.disabled = !formIsValid(true);
+  uploadButtonElement.disabled = !formIsValid(true);
 };
 
 const blockSubmitButton = () => {
   formUploading = true;
-  imgUploadButtonElement.disabled = true;
-  imgUploadButtonElement.textContent = 'Сохраняю...';
+  uploadButtonElement.disabled = true;
+  uploadButtonElement.textContent = 'Сохраняю...';
 };
 
 const unblockSubmitButton = () => {
   formUploading = false;
-  imgUploadButtonElement.disabled = false;
-  imgUploadButtonElement.textContent = 'Сохранить';
+  uploadButtonElement.disabled = false;
+  uploadButtonElement.textContent = 'Сохранить';
 };
 
 // Функция для открытия окна редактирования
-function openPhotoModal () {
-  imgUploadOverlayElement.classList.remove('hidden');
-  document.body.classList.add('modal-open');
+const openPhotoModal = () => {
   changePhotoPreview();
+  updateButtonStatus();
+  uploadOverlayElement.classList.remove('hidden');
+  document.body.classList.add('modal-open');
   // Листенер на ESC
   document.addEventListener('keydown', onPopupEscKeydown);
   // Обновление кнопки отправки
-  updateButtonStatus();
-}
+};
 
 const startModalWindow = () => {
   // Загрузка изображения открывает окно редактирования
   uploadFileElement.addEventListener('change', openPhotoModal);
 
   // Кнопка закрывает окно редактирования
-  imgCloseElement.addEventListener('click', (evt) => {
+  closeButtonElement.addEventListener('click', (evt) => {
     evt.preventDefault();
     closePhotoModal();
   });
 
   // Изменился текст в форме
-  imgUploadTextElement.addEventListener('input', updateButtonStatus);
+  uploadTextElement.addEventListener('input', updateButtonStatus);
 
   // Отправка формы
-  imgUploadForm.addEventListener('submit', (evt) => {
+  uploadFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
     if (!formIsValid()) {
       return;
