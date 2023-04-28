@@ -4,6 +4,7 @@ import { setScaleToStart } from './photo-scale-editor.js';
 import { clearEffect } from './photo-effect.js';
 import { sendData } from './api.js';
 import { showSendDataAlert, showSendDataSuccess } from './messages.js';
+import { changePhotoPreview } from './photo-view.js';
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFileElement = imgUploadForm.querySelector('#upload-file');
 const imgUploadOverlayElement = imgUploadForm.querySelector('.img-upload__overlay');
@@ -65,6 +66,7 @@ const unblockSubmitButton = () => {
 function openPhotoModal () {
   imgUploadOverlayElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  changePhotoPreview();
   // Листенер на ESC
   document.addEventListener('keydown', onPopupEscKeydown);
   // Обновление кнопки отправки
