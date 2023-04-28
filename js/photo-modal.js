@@ -74,6 +74,9 @@ const openPhotoModal = () => {
 };
 
 const startModalWindow = () => {
+  clearEffect();
+  setScaleToStart();
+
   // Загрузка изображения открывает окно редактирования
   uploadFileElement.addEventListener('change', openPhotoModal);
 

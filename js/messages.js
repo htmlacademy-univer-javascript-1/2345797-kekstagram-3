@@ -1,6 +1,6 @@
 import { findTemplate, isEscapeKey } from './util.js';
 const internetErrorMessageElement = document.querySelector('.error_connect');
-const imgUploadOverlayElement = document.querySelector('.img-upload__overlay');
+const uploadOverlayElement = document.querySelector('.img-upload__overlay');
 
 const showGetDataAlert = () => {
   internetErrorMessageElement.classList.remove('hidden');
@@ -16,12 +16,12 @@ const getESCListener = (closeFunction) => (evt) => {
 
 const showSendDataAlert = () => {
   const alertElement = findTemplate('#error', '.error').cloneNode(true);
-  imgUploadOverlayElement.classList.add('hidden');
+  uploadOverlayElement.classList.add('hidden');
   const ESCListener = getESCListener(closeDataAlertMessage);
 
   function closeDataAlertMessage() {
     document.body.removeChild(alertElement);
-    imgUploadOverlayElement.classList.remove('hidden');
+    uploadOverlayElement.classList.remove('hidden');
     document.removeEventListener('keydown', ESCListener);
   }
 

@@ -1,7 +1,7 @@
 const sliderDivElement = document.querySelector('.effect-level__slider');
-const imgUploadEffectLevelElement = document.querySelector('.img-upload__effect-level');
+const uploadEffectLevelElement = document.querySelector('.img-upload__effect-level');
 const effectLevelValueElement = document.querySelector('.effect-level__value');
-const imgUploadPreviewElement = document.querySelector('.img-upload__preview').children[0];
+const uploadPreviewElement = document.querySelector('.img-upload__preview').children[0];
 
 noUiSlider.create(sliderDivElement, {
   range: {
@@ -73,18 +73,18 @@ sliderDivElement.noUiSlider.on('update', () => {
   const valueSlider = sliderDivElement.noUiSlider.get();
   effectLevelValueElement.value = valueSlider;
   if (effectNow !== 'none') {
-    imgUploadPreviewElement.style.filter = effects[effectNow].pattern(valueSlider);
+    uploadPreviewElement.style.filter = effects[effectNow].pattern(valueSlider);
   }
 });
 
 const changeEffect = (effect) => {
   effectNow = effect;
   if (effectNow === 'none') {
-    imgUploadEffectLevelElement.classList.add('hidden');
-    imgUploadPreviewElement.style.filter = '';
+    uploadEffectLevelElement.classList.add('hidden');
+    uploadPreviewElement.style.filter = '';
     return;
   }
-  imgUploadEffectLevelElement.classList.remove('hidden');
+  uploadEffectLevelElement.classList.remove('hidden');
   sliderDivElement.noUiSlider.updateOptions(effects[effectNow].settings);
   sliderDivElement.noUiSlider.set(effects[effectNow].settings.range.max);
 };

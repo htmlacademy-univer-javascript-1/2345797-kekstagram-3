@@ -1,6 +1,6 @@
-const imgUploadForm = document.querySelector('.img-upload__form');
+const uploadForm = document.querySelector('.img-upload__form');
 
-const pristine = new Pristine(imgUploadForm, {
+const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'form--invalid',
   successClass: 'form--valid',
@@ -10,7 +10,7 @@ const pristine = new Pristine(imgUploadForm, {
 }, true);
 
 const hideValidateMessages = () => {
-  const errorMessage = imgUploadForm.querySelectorAll('.form__error');
+  const errorMessage = uploadForm.querySelectorAll('.form__error');
   errorMessage.forEach((element) => { element.style.display = 'none'; });
 };
 
