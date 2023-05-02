@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { formIsValid, hideValidateMessages } from './photo-validate-form.js';
+import { checkFormValidation, hideValidateMessages } from './photo-validate-form.js';
 import { setScaleToStart } from './photo-scale-editor.js';
 import { clearEffect } from './photo-effect.js';
 import { sendData } from './api.js';
@@ -47,7 +47,7 @@ const updateButtonStatus = () => {
   if (formUploading) {
     return;
   }
-  uploadButtonElement.disabled = !formIsValid(true);
+  uploadButtonElement.disabled = !checkFormValidation(true);
 };
 
 const blockSubmitButton = () => {
@@ -92,7 +92,7 @@ const startModalWindow = () => {
   // Отправка формы
   uploadFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    if (!formIsValid()) {
+    if (!checkFormValidation()) {
       return;
     }
     blockSubmitButton();
